@@ -9,7 +9,7 @@ const Estudiante = require('../models/estudiante');
 
 //Create a user, person and student
 const createUser = async(req = request, res = response) => {
-    const { password, role, email } = req.body;
+    const { contrasena, rol, correo } = req.body;
 
     try {
 
@@ -17,8 +17,8 @@ const createUser = async(req = request, res = response) => {
 
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(password, salt);
-        user.estado = getEstadoFromRole(role);
+        user.contrasena = bcrypt.hashSync(contrasena, salt);
+        user.estado = getEstadoFromRole(rol);
 
         // Save user
         await user.save(); //end save
@@ -35,14 +35,14 @@ const createUser = async(req = request, res = response) => {
 
         var data;
         //Save estudiante/auxiliar
-        switch (role) {
+        switch (rol) {
             case 'USER_ROLE':
                 data = new Estudiante({
                     persona: persona._id,
                     ...req.body
                 });
 
-                await estudiante.save();
+                await data.save();
                 break;
         }
 
@@ -71,9 +71,9 @@ const createUser = async(req = request, res = response) => {
 
 };
 
-const getEstadoFromRole = (role) => {
+const getEstadoFromRole = (rol) => {
 
-    switch (role) {
+    switch (rol) {
         case 'USER_ROLE':
             return 'habilitado'
         case 'AUX_ROLE':

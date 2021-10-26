@@ -10,7 +10,7 @@ const EstudianteSchema = Schema({
     persona: {
         type: Schema.Types.ObjectId,
         ref: 'Persona',
-        required: true
+        required: false
     }
     
 });
