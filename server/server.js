@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 //Load routes index
-//app.use('/api', require('../routes/index_routes'));
+app.use('/api', require('../routes/index_routes'));
 
 
 //Connect to database
