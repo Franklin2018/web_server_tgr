@@ -5,6 +5,7 @@ const { generarJWT } = require('../helpers/jwt');
 const Usuario = require('../models/usuario');
 const Persona = require('../models/persona');
 const Estudiante = require('../models/estudiante');
+const Auxiliar = require('../models/auxiliar');
 
 
 //Create a user, person and student
@@ -41,9 +42,15 @@ const createUser = async(req = request, res = response) => {
                     persona: persona._id,
                     ...req.body
                 });
-
                 await data.save();
                 break;
+            case 'AUX_ROLE':
+                data = new Auxiliar({
+                    persona: persona._id,
+                    ...req.body
+                });
+                await data.save();
+                break;    
         }
 
 
