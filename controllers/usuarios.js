@@ -25,12 +25,14 @@ const createUser = async(req = request, res = response) => {
         await user.save(); //end save
 
         userId = user._id;
+       
+       
 
         const persona = new Persona({
             usuario: userId,
             ...req.body
         });
-
+         
         // Guardar persona
         await persona.save();
 
