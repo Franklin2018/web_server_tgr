@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const Persona = require('../models/persona');
 const Estudiante = require('../models/estudiante');
+const Auxiliar = require('../models/auxiliar.js');
 // const Medico = require('../models/medico');
 const { generarJWT } = require('../helpers/jwt');
 //const { getMenuFrontEnd } = require('../helpers/menu-frontend');
@@ -121,6 +122,9 @@ const getDataByRol = async(role, id) => {
         case 'USER_ROLE':
             dataDB = await Estudiante.findOne({ 'persona': id });
             break;
+        case 'AUX_ROLE':
+            dataDB = await Auxiliar.findOne({ 'persona': id });
+            break;    
     }
     return dataDB;
 }

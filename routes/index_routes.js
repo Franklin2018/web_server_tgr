@@ -7,7 +7,6 @@ app.use(require('./usuarios'));
 // app.use(require('./room'));
 //app.use(require('./login'));
 app.use(require('./asignatura'));
-
-
+app.use(require('./auxiliar'));
 
 module.exports = app;
