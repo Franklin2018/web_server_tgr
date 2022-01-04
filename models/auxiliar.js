@@ -6,7 +6,7 @@ const AuxiliarSchema = Schema({
     ci:{
         type:String,
         require: true
-    },
+    }, 
     asignatura: [{
         type: Schema.Types.ObjectId,
         required: false

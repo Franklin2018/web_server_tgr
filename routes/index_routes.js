@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-//Calling the routes defined
+//Calling the defined routes
 app.use(require('./usuarios'));
  app.use(require('./login'));
 // app.use(require('./room'));

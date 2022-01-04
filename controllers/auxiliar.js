@@ -4,6 +4,7 @@ const Auxiliar = require('../models/auxiliar');
 const Persona = require('../models/persona');
 const Usuario = require('../models/usuario');
 const Asignatura = require('../models/asignatura');
+const { populate } = require('../models/auxiliar');
 
 
 
@@ -140,9 +141,42 @@ const getAuxiliarByNombre = async(req, res = response) => {
         })
     }
 }
+
+const getAuxiliarByMateria = async(req, res = response) => {
+    const nombre = req.body.materia;
+    let sw='true';
+    const idMateria= await Asignatura.find({nombre},'_id');
+    var idMateriaFinal=idMateria[0]._id;
+    var listaAuxEncontrados=[];
+
+    const auxiliares= await Auxiliar.find((err,auxDB)=>{
+        
+        auxDB.forEach(aux=>{
+
+            aux.asignatura.forEach(asig=>{
+             
+                if(asig.equals(idMateriaFinal)){
+                    listaAuxEncontrados.push(aux.persona);
+                }
+        });
+    
+    
+        });
+    }).populate({ path: 'persona', select: 'nombre apellidos usuario', populate: { path: 'usuario', select:"img_perfil" }});
+    
+
+    res.json({
+        ok: true,
+        listaAuxEncontrados
+    });
+
+}
+
+
 module.exports = {
     getAuxiliares,
     getAuxiliarById,
     getAuxiliarByAsignatura,
-    getAuxiliarByNombre
+    getAuxiliarByNombre,
+    getAuxiliarByMateria
 }

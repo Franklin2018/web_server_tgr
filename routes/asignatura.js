@@ -1,12 +1,14 @@
 const { Router } = require('express');
 
 
-const {crearAsignatura, getAsignaturas} = require('../controllers/asignatura');
+const {crearAsignatura, getAsignaturas,pushAsignaturaToUser} = require('../controllers/asignatura');
 
 
 const router = Router();
 
 router.post('/crearasignatura', crearAsignatura);
-router.get('/getasignaturass', getAsignaturas);
+router.post('/pushtouser', pushAsignaturaToUser);
+router.get('/getasignaturas', getAsignaturas);
+
 
 module.exports = router;

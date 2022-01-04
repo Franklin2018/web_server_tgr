@@ -1,50 +1,32 @@
-const { Router } = require('express');
+const express = require('express');
+const app = express();
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-const { validarJWT } = require('../middlewares/validar-jwt');
+// const { validarJWT } = require('../middlewares/validar-jwt');
 
 const {
     getAuxiliares,
     getAuxiliarById,
     getAuxiliarByAsignatura,
-    getAuxiliarByNombre
+    getAuxiliarByNombre,
+    getAuxiliarByMateria
 } = require('../controllers/auxiliar')
 
 
-const router = Router();
 
-router.get('/', getAuxiliares);
+app.get('/getallaux', getAuxiliares);
 
-router.get('/:id',
-    validarJWT,
+app.get('/getauxbyid/:id',
+    // validarJWT,
     getAuxiliarById
 );
 
-router.get('/getauxiliar/:asignatura', getAuxiliarByAsignatura);
-router.post('/getauxiliarbynombre', getAuxiliarByNombre);
+app.get('/getauxiliar/:asignatura', getAuxiliarByAsignatura);
+app.get('/getauxiliarbynombre', getAuxiliarByNombre);
+app.get('/getauxbymateria', getAuxiliarByMateria);
 
-module.exports = router;
+module.exports = app;
 
-// router.post('/', [
-//         // validarJWT,
-//         check('persona', 'El campo persona es requerido').isMongoId(),
-//         validarCampos
-//     ],
-//     crearMedico
-// );
-
-// router.put('/:id', [
-//         validarJWT,
-//         check('persona', 'El campo persona es requerido').isMongoId(),
-//         validarCampos
-//     ],
-//     actualizarMedico
-// );
-
-// router.delete('/:id',
-//     validarJWT,
-//     borrarMedico
-// );
 
 
