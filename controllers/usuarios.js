@@ -10,6 +10,7 @@ const Auxiliar = require('../models/auxiliar');
 
 //Create a user, person and student
 const createUser = async(req = request, res = response) => {
+    
     const { contrasena, rol, correo } = req.body;
 
     try {
