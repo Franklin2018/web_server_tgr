@@ -103,8 +103,28 @@ const getAsignaturas = async(req, res) => {
       })
 }
 
+
+const getAsignaturaById = async(req, res) => {
+
+    const id = req.params.id;
+
+    Asignatura.findById(id).exec( (err, asignatura) =>{
+        if (err) {
+          return res.status(400).json({
+             ok:false,
+             err:err
+           });
+         }
+         res.json({
+           ok: true,
+           asignatura
+         })
+      })
+}
+
 module.exports = {
    crearAsignatura,
    getAsignaturas,
-   pushAsignaturaToUser
+   pushAsignaturaToUser,
+   getAsignaturaById
 }
