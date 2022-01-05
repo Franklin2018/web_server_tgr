@@ -5,7 +5,7 @@ const Test = require('../models/test');
 const Pregunta = require('../models/pregunta');
 
 
-
+//Create a test of any subject
 const create = async(req= request, res = response) => {   
 
      
@@ -23,6 +23,7 @@ const create = async(req= request, res = response) => {
 
 }
 
+//Create questions only for adding to a test later
 const createQuestion = async(req= request, res = response) => {   
 
      
@@ -40,6 +41,7 @@ const createQuestion = async(req= request, res = response) => {
 
 }
 
+//Add question to test
 const addQuestionToTest = async (req=request,res=response)=>{
 
     const {id, preguntaId} =  req.body;
@@ -58,7 +60,7 @@ const addQuestionToTest = async (req=request,res=response)=>{
 }
 
 
-
+//Add responses to  question
 const addResponseToQuest = async (req=request,res=response)=>{
 
     const {id} =  req.body;
@@ -79,9 +81,34 @@ const addResponseToQuest = async (req=request,res=response)=>{
 
     });
 
-
 }
 
+
+
+
+const getTestById=async (req=request, res=response)=>{
+        
+    const id = req.params.id;
+
+    try {
+        const test = await Test.findOne({asignatura:id}).
+        populate({ path: 'preguntas', model: Pregunta });
+
+          
+
+        res.json({
+            ok:true,
+            test
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            ok: true,
+            msg: 'Hable con el administrador'
+        })
+    }
+    }
 
 
 
@@ -94,5 +121,6 @@ module.exports = {
     create,
     createQuestion,
     addQuestionToTest,
-    addResponseToQuest
+    addResponseToQuest,
+    getTestById
 }
