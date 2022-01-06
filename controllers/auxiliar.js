@@ -4,7 +4,6 @@ const Auxiliar = require('../models/auxiliar');
 const Persona = require('../models/persona');
 const Usuario = require('../models/usuario');
 const Asignatura = require('../models/asignatura');
-const { populate } = require('../models/auxiliar');
 
 
 
@@ -24,6 +23,7 @@ const getAuxiliarById = async(req, res = response) => {
     try {
         const auxiliar = await Auxiliar.findById(id)
             .populate('persona', 'nombre apellido img')
+             .populate({ path: 'asignatura', model: Asignatura });
 
         res.json({
             ok: true,

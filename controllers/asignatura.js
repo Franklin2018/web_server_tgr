@@ -122,9 +122,12 @@ const getAsignaturaById = async(req, res) => {
       })
 }
 
+
+
+
 module.exports = {
    crearAsignatura,
    getAsignaturas,
    pushAsignaturaToUser,
-   getAsignaturaById
+   getAsignaturaById,
 }

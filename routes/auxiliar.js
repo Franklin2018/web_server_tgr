@@ -17,11 +17,8 @@ const {
 
 app.get('/getallaux', getAuxiliares);
 
-app.get('/getauxbyid/:id',
-    // validarJWT,
-    getAuxiliarById
-);
 
+app.get('/getauxbyid/:id',getAuxiliarById);
 app.get('/getauxiliar/:asignatura', getAuxiliarByAsignatura);
 app.get('/getauxiliarbynombre', getAuxiliarByNombre);
 app.get('/getauxbymateria', getAuxiliarByMateria);
