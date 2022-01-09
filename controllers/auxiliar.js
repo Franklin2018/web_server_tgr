@@ -1,10 +1,15 @@
 const { response } = require('express');
-
+var { upload } = require('../config_Cloudinary/config');
 const Auxiliar = require('../models/auxiliar');
 const Persona = require('../models/persona');
 const Usuario = require('../models/usuario');
 const Asignatura = require('../models/asignatura');
-
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret,
+});
 
 
 const getAuxiliares = async(req, res = response) => {
@@ -172,11 +177,43 @@ const getAuxiliarByMateria = async(req, res = response) => {
 
 }
 
+const pushImageToUser = async(req, res = response) => {
+    const id = req.params.id;
+
+    upload(req, res, (err) => {
+
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+                //Guardar en cloudinary la imagen original y obtener la url
+                cloudinary.uploader.upload(req.file.path, (err, result) => {
+                   if (err) { return res.status(500).json({ ok: false, err }); }
+
+                    //Captura el link de la imagen original y luego lo pusheamos en el user
+                    imgUrl = result.url;
+                    //Guardamos ambos link en la DB con un solo id 
+                    Usuario.findById(id).exec((err, auxDB)=>{
+                   if (err) { return res.status(500).json({ ok: false, err }); }
+                      auxDB.img_perfil=imgUrl
+                      auxDB.save((err, auxiliar)=>{res.json({ok:true, auxiliar});});  
+                    });
+                    // return res.status(200).json({
+                    //     imgUrl
+                    // });
+                });
+    });
+   
+}
+
 
 module.exports = {
     getAuxiliares,
     getAuxiliarById,
     getAuxiliarByAsignatura,
     getAuxiliarByNombre,
-    getAuxiliarByMateria
+    getAuxiliarByMateria,
+    pushImageToUser
 }

@@ -3,14 +3,13 @@ const app = express();
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-// const { validarJWT } = require('../middlewares/validar-jwt');
 
 const {
     getAuxiliares,
     getAuxiliarById,
     getAuxiliarByAsignatura,
     getAuxiliarByNombre,
-    getAuxiliarByMateria
+    getAuxiliarByMateria,
 } = require('../controllers/auxiliar')
 
 
