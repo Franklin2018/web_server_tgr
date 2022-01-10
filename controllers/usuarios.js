@@ -78,7 +78,6 @@ const createUser = async(req = request, res = response) => {
         });
     }
 
-
 };
 
 const getEstadoFromRole = (rol) => {
@@ -87,7 +86,7 @@ const getEstadoFromRole = (rol) => {
         case 'USER_ROLE':
             return 'habilitado'
         case 'AUX_ROLE':
-            return 'inhabilitado'
+            return 'habilitado'
         case 'ADMIN_ROLE':
             return 'habilitado'
         default:
