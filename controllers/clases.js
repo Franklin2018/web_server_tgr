@@ -75,6 +75,42 @@ const getStudentByAuxId=async (req=request, res=response)=>{
     
     }
 
+    const getNombreSala = async (req=request, res=response)=>{
+
+    const auxId = req.params.auxId;  
+    const asigId = req.params.asigId;
+
+   const clase = await AsignaturaClase.findOne({asignatura:asigId, auxiliar: auxId});
+
+    res.json({
+        ok:true,
+        sala:clase.sala
+    })
+
+    }; 
+
+    const cambiarEstadoSala = async (req=request, res=response)=>{
+
+        const auxId = req.params.auxId;  
+        const asigId = req.params.asigId;
+        const estado = req.params.estado;
+    
+       await AsignaturaClase.findOne({asignatura:asigId, auxiliar: auxId}).exec((err, sala)=>{
+        if(err){return res.json({ok:false, err});}
+
+        sala.sala.estado=estado;
+        sala.save((err, salaUpdate)=>{
+            if(err){return res.json({ok:false, err});}
+            res.json({
+                ok:true,
+                salaUpdate:salaUpdate.sala
+            });
+        });
+
+       });;
+    
+    
+        }; 
 
 
 
@@ -85,6 +121,7 @@ const getStudentByAuxId=async (req=request, res=response)=>{
 module.exports = {
     createRoom,
     addStudentToClass,
-    getStudentByAuxId
-    // getTestById
+    getStudentByAuxId,
+    getNombreSala,
+    cambiarEstadoSala
 }

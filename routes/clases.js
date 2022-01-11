@@ -5,7 +5,9 @@ const router = Router();
 const {
     createRoom,
     addStudentToClass,
-    getStudentByAuxId
+    getStudentByAuxId,
+    getNombreSala,
+    cambiarEstadoSala
 } 
      = require('../controllers/clases');
 
@@ -14,7 +16,8 @@ const {
 router.post('/create/room/:asigId/:auxId', createRoom);
  router.post('/add/student', addStudentToClass);
 router.get('/get/students/:auxId/:asigId', getStudentByAuxId);
-// router.get('/get/test/:id', getTestById);
+router.get('/getnombresala/:auxId/:asigId', getNombreSala);
+router.put('/cambiarnombresala/:auxId/:asigId/:estado', cambiarEstadoSala);
 
 
 module.exports = router;
