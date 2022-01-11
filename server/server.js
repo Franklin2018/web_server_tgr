@@ -16,7 +16,7 @@ app.use('/api', require('../routes/index_routes'));
 
 //Connect to database
 dbConnection();
-
+process.env.PORT = process.env.PORT || 3000;
 server.listen(process.env.PORT, (err) => {
     if (err) throw new Error(err);
     console.log('Conectado al puerto', process.env.PORT);
