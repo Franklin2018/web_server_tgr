@@ -48,7 +48,7 @@ const getAuxiliarByAsignatura = async(req, res = response) => {
 
     const nombreAsignatura = req.params.asignatura;
 
-    await Medico.find({ asignatura: nombreAsignatura }, 'calificacion asignatura').populate('persona', 'nombre apellido')
+    await Auxiliar.find({ asignatura: nombreAsignatura }, 'calificacion asignatura').populate('persona', 'nombre apellidos')
         .exec((err, auxilaresDB) => {
             if (err) {
                 return res.status(400).json({

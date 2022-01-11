@@ -1,4 +1,3 @@
-//controlador login
 const { response, request } = require('express');
 
 const Test = require('../models/test');

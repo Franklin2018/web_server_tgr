@@ -5,7 +5,7 @@ const app = express();
 app.use(require('./usuarios'));
  app.use(require('./login'));
 app.use(require('./test'));
-//app.use(require('./login'));
+app.use(require('./clases'));
 app.use(require('./asignatura'));
 app.use(require('./auxiliar'));
 
