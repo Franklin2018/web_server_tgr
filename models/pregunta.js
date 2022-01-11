@@ -26,7 +26,7 @@ var responseSchema = Schema({
 });
 
 
-
+ 
 const PreguntaSchema = Schema({
 
     pregunta:{
