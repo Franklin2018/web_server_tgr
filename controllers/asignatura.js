@@ -2,6 +2,11 @@ const { response, request } = require('express');
 const Asignatura = require('../models/asignatura');
 const Auxiliar = require('../models/auxiliar');
 
+const { dbConnection } = require('../database/config');
+const test=async(req,res)=>{
+ res.json({ok: true,
+    uri:process.env.MONGO_URI});
+};
 
 const crearAsignatura = async (req,res)=>{
 
@@ -130,4 +135,5 @@ module.exports = {
    getAsignaturas,
    pushAsignaturaToUser,
    getAsignaturaById,
+   test
 }
